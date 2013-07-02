@@ -34,7 +34,9 @@ include Makefile
 OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
-OBJECTFILES=
+OBJECTFILES= \
+	${OBJECTDIR}/src/CarPi.o \
+	${OBJECTDIR}/src/obd2/obdlib.o
 
 
 # C Compiler Flags
@@ -59,7 +61,17 @@ LDLIBSOPTIONS=
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/carpi.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/carpi ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/carpi ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/src/CarPi.o: src/CarPi.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CarPi.o src/CarPi.cpp
+
+${OBJECTDIR}/src/obd2/obdlib.o: src/obd2/obdlib.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/obd2
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/obd2/obdlib.o src/obd2/obdlib.cpp
 
 # Subprojects
 .build-subprojects:
