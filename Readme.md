@@ -11,5 +11,8 @@ The following hardware was used to develop the project:
 Requirements
 ============
  * c++11 compatible compiler
- * libOBD2 v1.0.0
- * boost v1.5.3
+ * boost v1.5.4
+
+Thanks
+======
+Thanks go out to Michael Carpenter who created the libobd which was modified for this project to fit our needs. 

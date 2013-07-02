@@ -1,6 +1,6 @@
 /* 
  * File:   CarPi.cpp
- * Author: Benjamin
+ * Author: Benjamin Börngen-Schmidt
  *
  * Created on 2. Juli 2013, 11:43
  */

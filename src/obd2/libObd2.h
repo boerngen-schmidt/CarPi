@@ -19,66 +19,29 @@
 ***************************************************************************/
 
 
-#ifndef OBDLIB_H
-#define OBDLIB_H
+#ifndef _LIBOBD2_H_INCLUDED_
+#define _LIBOBD2_H_INCLUDED_
+
+// Includes
 #include <stdio.h>
 #include <unistd.h>
 #include <string>
-
-#ifdef WINHACK
-#define M_SleepSec(x) Sleep(1000 * x);
-#include <windows.h>
-//#ifdef WIN32
-//#define STDCALL __sttribute__((__stdcall__))
-//#define STDCALL __stdcall
-#define STDCALL  __declspec(dllexport) 
-#else
-#define M_SleepSec(x) usleep(x * 1000000);
+#include <vector>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <termios.h>
+
+// Macros & Definitions
 #define STDCALL
 #	define byte unsigned char
 #	define HANDLE int
 #	define DWORD long
-
-#endif	// WIN32
-#include <vector>
+#define M_SleepSec(x) usleep(x * 1000000);
 
 
-
-struct variantStruct
-{
-	int intVar;
-	double doubleVarOne;
-	double doubleVarTwo;
-	byte byteVar;
-	std::vector<byte> vectorBytes;
-	byte typeVar;
-	byte btMode;
-	byte btPID;
-};
-struct obdInfoStruct
-{
-	DWORD dwItemType;
-	std::string strItemDesc;
-	byte btMode;
-	byte btPID;
-	byte btItemSizeBytes;
-	DWORD dwOperation;
-	double dFactor;
-	double dOffset;
-	int iRangeLow;
-	int iRangeHigh;
-	std::string strUnitLabel;
-	int iBitLookupTable;
-};
-
-class obdLib
-{
+class libObd2 {
 public:
-
 	enum ObdError
 	{
 		NODATA=0,
@@ -98,17 +61,17 @@ public:
 		DEBUG_ERROR=4,
 		DEBUG_FATAL=5
 	};
-	obdLib();
+	libObd2();
 	int openPort(const char *portName,int baudrate);
 	int openPort(const char *portName);
 	void setPortHandle(HANDLE hdnl);
 	int initPort();
 	int closePort();
 	void flush();
-	void setDebugCallback(void (*callbackptr)(const char*,void*,obdLib::DebugLevel),void *);
+	void setDebugCallback(void (*callbackptr)(const char*,void*,libObd2::DebugLevel),void *);
 	void setCommsCallback(void (*callbackptr)(const char*,void*),void*);
 	std::string monitorModeReadLine();
-	//byte* sendRequest(byte *reqString,int length);
+//      byte* sendRequest(byte *reqString,int length);
 //	byte* sendRequest(char *asciiReqString, int length);
 	static byte byteArrayToByte(byte b1, byte b2);
 	std::string getVersion() { return versionString; }
