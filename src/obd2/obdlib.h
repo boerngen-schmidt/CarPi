@@ -22,9 +22,8 @@
 #ifndef OBDLIB_H
 #define OBDLIB_H
 #include <stdio.h>
-
+#include <unistd.h>
 #include <string>
-//#define WINHACK
 
 #ifdef WINHACK
 #define M_SleepSec(x) Sleep(1000 * x);

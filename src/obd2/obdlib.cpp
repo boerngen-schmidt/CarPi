@@ -24,10 +24,13 @@
 #include <fstream>
 #include <string.h>
 #include <cstdarg>
+
 void (*debugCallback)(const char *,void*,obdLib::DebugLevel) = NULL;
 void (*commsCallback)(const char *,void*) = NULL;
 void *debugUserData = NULL;
 void *commsUserData = NULL;
+
+// Implementation of Methods
 obdLib::obdLib()
 {
 	m_lastError = NONE;
