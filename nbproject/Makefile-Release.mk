@@ -36,7 +36,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/CarPi.o \
-	${OBJECTDIR}/src/obd2/obdlib.o
+	${OBJECTDIR}/src/logger/BoostLogLogger.o \
+	${OBJECTDIR}/src/obd2/libObd2.o
 
 
 # C Compiler Flags
@@ -68,10 +69,15 @@ ${OBJECTDIR}/src/CarPi.o: src/CarPi.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/CarPi.o src/CarPi.cpp
 
-${OBJECTDIR}/src/obd2/obdlib.o: src/obd2/obdlib.cpp 
+${OBJECTDIR}/src/logger/BoostLogLogger.o: src/logger/BoostLogLogger.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/logger
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/logger/BoostLogLogger.o src/logger/BoostLogLogger.cpp
+
+${OBJECTDIR}/src/obd2/libObd2.o: src/obd2/libObd2.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/obd2
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/obd2/obdlib.o src/obd2/obdlib.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/obd2/libObd2.o src/obd2/libObd2.cpp
 
 # Subprojects
 .build-subprojects:

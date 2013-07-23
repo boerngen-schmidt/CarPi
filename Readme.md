@@ -7,10 +7,11 @@ Hardware
 The following hardware was used to develop the project:
  * Raspberry Pi version B
  * USB-2-RS232 OBD-2 Dongle with an STN1101 chip (ELM327 alternative)
+ * Cooking-Hacks 3G + GPS Module
 
 Requirements
 ============
- * c++11 compatible compiler
+ * c++11 compatible compiler, tested with gcc-4.7.2
  * boost v1.5.4
 
 Thanks
