@@ -23,7 +23,7 @@
 #define _LIBOBD2_H_INCLUDED_
 
 // Includes
-#include <stdio.h>
+#include <cstdio>
 #include <unistd.h>
 #include <string>
 #include <vector>
