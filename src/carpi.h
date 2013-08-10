@@ -46,9 +46,9 @@ private:
   void init_logging();
 
 public:
-CarPi();
-void run();
-virtual ~CarPi();
+  CarPi();
+  void run();
+  virtual ~CarPi();
 };
 
 #endif // CARPI_H
