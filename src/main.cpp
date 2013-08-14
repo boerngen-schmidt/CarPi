@@ -23,6 +23,9 @@ void signalHandler(int signal) {
 		case SIGTERM:
 			doRun = false;
 			break;
+		case SIGHUP:
+			// TODO log and do nothing :-)
+			break;
 	}
 	return;
 }
@@ -76,12 +79,12 @@ int main(int argc, char** argv) {
 	 * register the signalHandler for SIGTERM
 	 * http://www.cplusplus.com/reference/csignal/signal/
 	 */
-	void (*prev_fn)(int);
-	// pointer to the function which was previously in charge of handeling the signal
-	prev_fn = signal (SIGTERM,signalHandler);
-	if (prev_fn==SIG_IGN) {
-		signal (SIGTERM,SIG_IGN);
-	}
+	signal(SIGTERM, signalHandler); /* catch kill signal */
+	signal(SIGHUP, signalHandler); /* catch hangup signal */
+	signal(SIGCHLD, SIG_IGN); /* ignore child */
+	signal(SIGTSTP, SIG_IGN); /* ignore tty signals */
+	signal(SIGTTOU, SIG_IGN);
+	signal(SIGTTIN, SIG_IGN);
 
 	while(doRun) {
 		
