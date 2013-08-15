@@ -41,7 +41,8 @@ CarPi::~CarPi() {
  * @return void
  */
 void CarPi::run() {
-	
+	boost::thread_group tg();
+	// Start adding threads
 }
 
 void CarPi::init_logging() {
