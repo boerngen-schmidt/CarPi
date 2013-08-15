@@ -32,10 +32,11 @@
 #include <boost/log/core.hpp>
 #include <boost/log/sinks/sync_frontend.hpp>
 #include <boost/log/sinks/text_file_backend.hpp>
+#include <boost/thread.hpp>
 
 namespace logging = boost::log;
-namespace sinks = boost::log::sinks;
-namespace keywords = boost::log::keywords;
+namespace sinks = boost::log::BOOST_LOG_VERSION_NAMESPACE::sinks;
+namespace keywords = boost::log::BOOST_LOG_VERSION_NAMESPACE::keywords;
 
 class CarPi
 {
@@ -48,9 +49,31 @@ private:
   void init_logging();
 
 public:
-  CarPi();
-  void run();
-  virtual ~CarPi();
+
+	/**
+	 * @brief Constructor
+	 * 
+	 */
+	CarPi();
+  
+	/**
+	 * @brief Starts data aquistion threads
+	 * 
+	 * @return void
+	*/ 
+	void run();
+  
+	/**
+	* @brief Stops all running threads
+	* 
+	* @return void
+	*/
+	void stop();
+	/**
+	 * @brief Class destructor
+	 * 
+	 */
+	virtual ~CarPi();
 };
 
 #endif // CARPI_H

@@ -32,7 +32,7 @@ CarPi::CarPi() {
 }
 
 CarPi::~CarPi() {
-
+	
 }
 
 /**
@@ -41,7 +41,7 @@ CarPi::~CarPi() {
  * @return void
  */
 void CarPi::run() {
-
+	
 }
 
 void CarPi::init_logging() {
