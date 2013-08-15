@@ -33,7 +33,9 @@
 #include <boost/log/sinks/sync_frontend.hpp>
 #include <boost/log/sinks/text_file_backend.hpp>
 
+namespace logging = boost::log;
 namespace sinks = boost::log::sinks;
+namespace keywords = boost::log::keywords;
 
 class CarPi
 {

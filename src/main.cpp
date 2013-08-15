@@ -6,12 +6,15 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <syslog.h>
+#include "carpi.h"
 
 
 /**
  * @brief Indicator if program loop should continue running
  */
 bool doRun = true;
+
+CarPi* carpi;
 
 /**
  * @brief Handles the signals
@@ -90,10 +93,10 @@ int main(int argc, char** argv) {
 	signal(SIGTTIN, SIG_IGN);
 	syslog(LOG_DEBUG, "DEBUG: Registered signal handling.");
 
-	while(doRun) {
-		
-		sleep(2);
-	}
+	carpi = new CarPi();
+	carpi->run();
+	// after return from run we free the memory space
+	delete carpi;
 	
 	/* Clean up */
 	syslog(LOG_DEBUG, "DEBUG: Exiting application.");

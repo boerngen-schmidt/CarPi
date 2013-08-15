@@ -1,4 +1,11 @@
+# Base CMakeLists.txt file
+
+# Add project name
 project(CarPi)
 
-add_executable(carpi src/main.cpp)
+# minimum cmake required version
+cmake_minimum_required(VERSION 2.8)
+
+# add the src directory to build
+add_subdirectory(src/)
 

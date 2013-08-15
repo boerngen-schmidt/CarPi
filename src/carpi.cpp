@@ -27,10 +27,6 @@
 
 #include "carpi.h"
 
-namespace logging = boost::log;
-namespace sinks = boost::log::sinks;
-namespace keywords = boost::log::keywords;
-
 CarPi::CarPi() {
 	this->init_logging();
 }
@@ -39,6 +35,11 @@ CarPi::~CarPi() {
 
 }
 
+/**
+ * @brief Starts all sub threads for the data aquisiton
+ * 
+ * @return void
+ */
 void CarPi::run() {
 
 }
@@ -72,6 +73,5 @@ void CarPi::init_logging() {
 	core->add_sink(sink_gps);
 	core->add_sink(sink_net);
 	core->add_sink(sink_odb);
-
 }
 
