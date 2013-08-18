@@ -29,27 +29,73 @@
 #ifndef CARPI_H
 #define CARPI_H
 
+#include <boost/log/common.hpp>
 #include <boost/log/core.hpp>
+#include <boost/log/expressions.hpp>
+#include <boost/log/attributes.hpp>
+#include <boost/log/attributes/attribute_value.hpp>
+#include <boost/log/attributes/scoped_attribute.hpp>
+#include <boost/log/sinks/basic_sink_frontend.hpp>
 #include <boost/log/sinks/sync_frontend.hpp>
 #include <boost/log/sinks/text_file_backend.hpp>
+#include <boost/log/sources/logger.hpp>
 #include <boost/thread.hpp>
 
-namespace logging = boost::log;
+namespace logging = boost::log::BOOST_LOG_VERSION_NAMESPACE;
+namespace attr = boost::log::BOOST_LOG_VERSION_NAMESPACE::attributes;
+namespace expr = boost::log::BOOST_LOG_VERSION_NAMESPACE::expressions;
 namespace sinks = boost::log::BOOST_LOG_VERSION_NAMESPACE::sinks;
+namespace src = boost::log::BOOST_LOG_VERSION_NAMESPACE::sources;
 namespace keywords = boost::log::BOOST_LOG_VERSION_NAMESPACE::keywords;
+
+typedef sinks::synchronous_sink< sinks::text_file_backend > sink_t;
+
+/**
+ * Source of the created log record
+ */
+enum source {
+	GPS,
+	NETWORK,
+	ODB
+};
+
+/**
+ * For future use of severity logger
+ */
+enum severity_level
+{
+	normal,
+	notification,
+	warning,
+	error,
+	critical
+};
 
 class CarPi
 {
-typedef sinks::synchronous_sink< sinks::text_file_backend > sink_t;
-  
 private:
-  sink_t const sink_gps;
-  sink_t const sink_net;
-  sink_t const sink_odb;
-  void init_logging();
+	boost::shared_ptr< sink_t > sink_gps;
+	boost::shared_ptr< sink_t > sink_net;
+	boost::shared_ptr< sink_t > sink_odb;
+	
+	/**
+	 * @brief Initializes the logging for the application
+	 * 
+	 * @return void
+	 */
+	void init_logging();
+	
+	void stop_logging();
+	
+	/**
+	 * @brief Sets up the collector for the Log file
+	 * 
+	 * @param sink_backend reference to a sink backend
+	 * @return void
+	 */
+	void init_logging_collecting(boost::shared_ptr<sinks::text_file_backend> sink_backend);
 
 public:
-
 	/**
 	 * @brief Constructor
 	 * 
@@ -69,6 +115,7 @@ public:
 	* @return void
 	*/
 	void stop();
+	
 	/**
 	 * @brief Class destructor
 	 * 

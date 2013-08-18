@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
 		po::store(po::parse_command_line(argc, argv, desc), vm);
 		
 		if (vm.count("help")) {
-			cout << desc << "\n";
+			cout << desc << endl;
 			return 0;
         }
         
@@ -129,5 +129,6 @@ int main(int argc, char** argv) {
 	/* Clean up */
 	syslog(LOG_DEBUG, "DEBUG: Exiting application.");
 	closelog(); /* close previously opened syslog */
+	
 	return 0;
 }
