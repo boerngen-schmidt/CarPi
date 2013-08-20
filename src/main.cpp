@@ -18,7 +18,7 @@ using namespace std;
  */
 bool doRun = true;
 
-CarPi* carpi;
+Pi::CarPi* carpi;
 
 /**
  * @brief Handles the signals
@@ -121,7 +121,7 @@ int main(int argc, char** argv) {
 		signal(SIGTTIN, SIG_IGN);
 		syslog(LOG_DEBUG, "DEBUG: Registered signal handling.");
 	}
-	carpi = new CarPi();
+	carpi = new Pi::CarPi();
 	carpi->run();
 	// after return from run we free the memory space
 	delete carpi;

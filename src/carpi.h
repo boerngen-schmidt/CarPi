@@ -41,86 +41,69 @@
 #include <boost/log/sources/logger.hpp>
 #include <boost/thread.hpp>
 
-namespace logging = boost::log::BOOST_LOG_VERSION_NAMESPACE;
-namespace attr = boost::log::BOOST_LOG_VERSION_NAMESPACE::attributes;
-namespace expr = boost::log::BOOST_LOG_VERSION_NAMESPACE::expressions;
-namespace sinks = boost::log::BOOST_LOG_VERSION_NAMESPACE::sinks;
-namespace src = boost::log::BOOST_LOG_VERSION_NAMESPACE::sources;
-namespace keywords = boost::log::BOOST_LOG_VERSION_NAMESPACE::keywords;
-
-typedef sinks::synchronous_sink< sinks::text_file_backend > sink_t;
-
-/**
- * Source of the created log record
- */
-enum source {
-	GPS,
-	NETWORK,
-	ODB
-};
-
-/**
- * For future use of severity logger
- */
-enum severity_level
-{
-	normal,
-	notification,
-	warning,
-	error,
-	critical
-};
-
-class CarPi
-{
-private:
-	boost::shared_ptr< sink_t > sink_gps;
-	boost::shared_ptr< sink_t > sink_net;
-	boost::shared_ptr< sink_t > sink_odb;
+namespace Pi {
 	
-	/**
-	 * @brief Initializes the logging for the application
-	 * 
-	 * @return void
-	 */
-	void init_logging();
-	
-	void stop_logging();
-	
-	/**
-	 * @brief Sets up the collector for the Log file
-	 * 
-	 * @param sink_backend reference to a sink backend
-	 * @return void
-	 */
-	void init_logging_collecting(boost::shared_ptr<sinks::text_file_backend> sink_backend);
+	namespace logging = boost::log::BOOST_LOG_VERSION_NAMESPACE;
+	namespace attr = boost::log::BOOST_LOG_VERSION_NAMESPACE::attributes;
+	namespace expr = boost::log::BOOST_LOG_VERSION_NAMESPACE::expressions;
+	namespace sinks = boost::log::BOOST_LOG_VERSION_NAMESPACE::sinks;
+	namespace src = boost::log::BOOST_LOG_VERSION_NAMESPACE::sources;
+	namespace keywords = boost::log::BOOST_LOG_VERSION_NAMESPACE::keywords;
 
-public:
-	/**
-	 * @brief Constructor
-	 * 
-	 */
-	CarPi();
-  
-	/**
-	 * @brief Starts data aquistion threads
-	 * 
-	 * @return void
-	*/ 
-	void run();
-  
-	/**
-	* @brief Stops all running threads
-	* 
-	* @return void
-	*/
-	void stop();
-	
-	/**
-	 * @brief Class destructor
-	 * 
-	 */
-	virtual ~CarPi();
-};
+	typedef sinks::synchronous_sink< sinks::text_file_backend > sink_t;
 
+	class CarPi
+	{
+	private:
+		boost::shared_ptr< sink_t > sink_gps;
+		boost::shared_ptr< sink_t > sink_net;
+		boost::shared_ptr< sink_t > sink_odb;
+		
+		/**
+		* @brief Initializes the logging for the application
+		* 
+		* @return void
+		*/
+		void init_logging();
+		
+		void stop_logging();
+		
+		/**
+		* @brief Sets up the collector for the Log file
+		* 
+		* @param sink_backend reference to a sink backend
+		* @return void
+		*/
+		void init_logging_collecting(boost::shared_ptr<sinks::text_file_backend> sink_backend);
+		
+		void test_callback(const char* data, unsigned int length);	
+
+	public:
+		/**
+		* @brief Constructor
+		* 
+		*/
+		CarPi();
+	
+		/**
+		* @brief Starts data aquistion threads
+		* 
+		* @return void
+		*/ 
+		void run();
+	
+		/**
+		* @brief Stops all running threads
+		* 
+		* @return void
+		*/
+		void stop();
+		
+		/**
+		* @brief Class destructor
+		* 
+		*/
+		virtual ~CarPi();
+	};
+} // End namespace CarPi
 #endif // CARPI_H
